@@ -6,7 +6,20 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:22:19 by agilles           #+#    #+#             */
-/*   Updated: 2023/11/20 09:22:20 by agilles          ###   ########.fr       */
+/*   Updated: 2023/11/29 14:59:28 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	if(!str)
+		return (0);
+	while(str)
+		i++;
+	return(i);
+}
