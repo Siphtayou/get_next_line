@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:15:35 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/07 15:44:54 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/07 17:49:21 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,28 @@ char	*ft_line(char *buff, char *stock)
 	char	*swap;
 	int	len;
 
-	if (stock[0])
+	if (!stock)
+		stock = ft_strdup(buff);
+	else
+	{
+		//swap = malloc(ft_strlen(stock) * sizeof(char));
 		swap = ft_strdup(stock);
-	free(stock);
-	if (!swap)
-		return (NULL);
-	len = (ft_strlen(buff) + ft_strlen(swap));
-	stock = malloc((len + 1) * sizeof(char));
+		free(stock);
+		if (!swap)
+			return (NULL);
+		len = (ft_strlen(buff) + ft_strlen(swap));
+		stock = malloc((len + 1 + is_line(buff)) * sizeof(char));
+		stock = ft_join(stock, swap, buff, len);
+		free(swap);
+	}
 	if (!stock)
 		return (NULL);
-	stock = ft_join(stock, swap, buff, len);
-	free(swap);
 	return(stock);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buff[BUFFER_SIZE + 1] = "";
+	static char	buff[BUFFER_SIZE + 1];
 	char		*stock;
 	int			byte;
 
