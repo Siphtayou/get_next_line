@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:15:35 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/05 17:24:44 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/07 15:44:54 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_newline(char *buff)
 
 	j = 0;
 	i = 0;
-	while (buff[i] != '\n')
+	while (buff[i] != '\n' && buff[i])
 		i++;
 	i++;
 	while (buff[j + i] != '\0')
@@ -43,6 +43,25 @@ int		is_line(char *buff)
 	return(0);
 }
 
+char	*ft_line(char *buff, char *stock)
+{
+	char	*swap;
+	int	len;
+
+	if (stock[0])
+		swap = ft_strdup(stock);
+	free(stock);
+	if (!swap)
+		return (NULL);
+	len = (ft_strlen(buff) + ft_strlen(swap));
+	stock = malloc((len + 1) * sizeof(char));
+	if (!stock)
+		return (NULL);
+	stock = ft_join(stock, swap, buff, len);
+	free(swap);
+	return(stock);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	buff[BUFFER_SIZE + 1] = "";
@@ -52,17 +71,19 @@ char	*get_next_line(int fd)
 	stock = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (buff)
-		ft_newline(buff); // cut tout jusqua \n et stock le reste dans stock
-	while (!is_line(buff)) // is_line verifie si ya \n
+	if (buff[0])
+		ft_newline(buff);
+	while (!is_line(buff))
 	{
 		byte = read(fd, buff, BUFFER_SIZE);
 		if (byte == 0)
 			return (stock);
 		else if (byte == -1)
-			return (free(stock), 0);
+			return (free(stock), NULL);
 		buff[byte] = '\0';
-		ft_line(buff, stock); // ft_line deplace buff dans stock mais sarrete apres \n ou \0 si ya dans buff
+		stock = ft_line(buff, stock);
+		if (!stock)
+			return (0);
 	}
 	return(stock);
 }
