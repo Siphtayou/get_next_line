@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:22:19 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/08 14:13:16 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 15:59:08 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_strdup(char *buff)
 	int		i;
 
 	i = 0;
-	stock = malloc(ft_strlen(buff)/* + is_line(stock)*/ * sizeof(char));
+	stock = malloc(ft_strlen(buff) + is_line(buff) * sizeof(char));
 	if (!stock)
 		return(NULL);
 	while (buff[i])

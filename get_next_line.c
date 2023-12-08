@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:15:35 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/08 14:16:50 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 16:16:59 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,14 @@ char	*get_next_line(int fd)
 	int			byte;
 
 	stock = NULL;
+	byte = BUFFER_SIZE + 1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (buff[0])
+	if (is_line(buff))
+	{
 		ft_newline(buff);
+		stock = ft_line(buff, stock);
+	}
 	while (!is_line(buff))
 	{
 		byte = read(fd, buff, BUFFER_SIZE);
@@ -89,5 +93,7 @@ char	*get_next_line(int fd)
 		if (!stock)
 			return (0);
 	}
+//	if (byte == BUFFER_SIZE + 1)
+//		stock = ft_line(buff, stock);
 	return(stock);
 }
