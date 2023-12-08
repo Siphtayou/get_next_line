@@ -6,7 +6,25 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:22:25 by agilles           #+#    #+#             */
-/*   Updated: 2023/11/20 09:22:26 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 15:18:15 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
+
+int			main(void)
+{
+	int		fd;
+	char	*line;
+
+	line = "a";
+	fd = open("test", O_RDONLY);
+	while (line)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+	}
+	close(fd);
+}

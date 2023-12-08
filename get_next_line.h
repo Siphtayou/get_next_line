@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:22:13 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/07 18:30:29 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:14:14 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		is_line(char *buff);
 int		is_line(char *buff);
 
 int		ft_strlen(char *str);
-char	*ft_strdup(char *stock);
+char	*ft_strdup(char *buff);
 char	*ft_linejoin(char *stock, int pos);
 char	*ft_join(char *stock, char *swap, char *buff, int len);
 

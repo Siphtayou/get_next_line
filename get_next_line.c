@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:15:35 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/07 18:59:59 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:16:50 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_line(char *buff, char *stock)
 		if (!swap)
 			return (NULL);
 		len = (ft_strlen(buff) + ft_strlen(swap));
-		stock = malloc((len + is_line(buff)) * sizeof(char));
+		stock = malloc((len) * sizeof(char));
 		stock = ft_join(stock, swap, buff, len);
 		free(swap);
 	}

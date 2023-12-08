@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:22:19 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/07 19:03:34 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 14:13:16 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,35 @@ int	ft_strlen(char *str)
 	i = 0;
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
-	i++;
+	if (str[i] == '\n')
+		i += 2;
+	else
+		i++;
 	return (i);
 }
 
-char	*ft_strdup(char *stock)
+char	*ft_strdup(char *buff)
 {
-	char	*temp;
+	char	*stock;
 	int		i;
 
 	i = 0;
-	temp = malloc((ft_strlen(stock) + is_line(stock)) * sizeof(char));
-	if (!temp)
+	stock = malloc(ft_strlen(buff)/* + is_line(stock)*/ * sizeof(char));
+	if (!stock)
 		return(NULL);
-	while (stock[i])
+	while (buff[i])
 	{
-		if (stock[i] == '\n')
+		if (buff[i] == '\n')
 		{
-			temp[i] = '\n';
-			temp[i + 1] = '\0';
-			return (temp);
+			stock[i] = '\n';
+			stock[i + 1] = '\0';
+			return (stock);
 		}
-		temp[i] = stock[i];
+		stock[i] = buff[i];
 		i++;
 	}
-	temp[i] = '\0';
-	return(temp);
+	stock[i] = '\0';
+	return(stock);
 }
 
 char	*ft_linejoin(char *stock, int pos)
