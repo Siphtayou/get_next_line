@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:22:19 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/08 15:59:08 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 17:53:08 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,25 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0' && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
-		i += 2;
+		i++;
 	else
 		i++;
 	return (i);
+}
+
+char	*ft_check(char *str)
+{
+	if (str[0] == '\0')
+	{
+		free(str);
+		return (NULL);
+	}
+	return (str);
 }
 
 char	*ft_strdup(char *buff)
@@ -32,10 +44,10 @@ char	*ft_strdup(char *buff)
 	int		i;
 
 	i = 0;
-	stock = malloc(ft_strlen(buff) + is_line(buff) * sizeof(char));
+	stock = malloc((ft_strlen(buff) + 1) * sizeof(char));
 	if (!stock)
-		return(NULL);
-	while (buff[i])
+		return (NULL);
+	while (buff && buff[i])
 	{
 		if (buff[i] == '\n')
 		{
@@ -47,7 +59,7 @@ char	*ft_strdup(char *buff)
 		i++;
 	}
 	stock[i] = '\0';
-	return(stock);
+	return (ft_check(stock));
 }
 
 char	*ft_linejoin(char *stock, int pos)
@@ -66,7 +78,6 @@ char	*ft_join(char *stock, char *swap, char *buff, int len)
 	s = 0;
 	while (len != 0)
 	{
-
 		if (swap[s] != '\0')
 		{
 			stock[s] = swap[s];
@@ -82,5 +93,5 @@ char	*ft_join(char *stock, char *swap, char *buff, int len)
 		len--;
 	}
 	stock[s + b] = '\0';
-	return(stock);
+	return (stock);
 }

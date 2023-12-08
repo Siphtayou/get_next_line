@@ -6,7 +6,7 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:15:35 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/08 16:16:59 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 18:09:27 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,44 @@ void	ft_newline(char *buff)
 {
 	int	i;
 	int	j;
+	int	len;
 
+	len = 0;
+	while (buff[len])
+		len++;
 	j = 0;
 	i = 0;
-	while (buff[i] != '\n' && buff[i])
+	while (buff[i] != '\n')
 		i++;
 	i++;
-	while (buff[j + i] != '\0')
+	while (j < (len - i))
 	{
-		buff[j] = buff[i + j];
+		buff[j] = buff[j + i];
 		j++;
 	}
 	buff[j] = '\0';
 }
-int		is_line(char *buff)
+
+int	is_line(char *buff)
 {
 	int	i;
 
 	i = 0;
+	if (!buff)
+		return (0);
 	while (buff[i] != '\0')
 	{
 		if (buff[i] == '\n')
 			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
 char	*ft_line(char *buff, char *stock)
 {
 	char	*swap;
-	int	len;
+	int		len;
 
 	if (!stock)
 		stock = ft_strdup(buff);
@@ -63,7 +70,7 @@ char	*ft_line(char *buff, char *stock)
 	}
 	if (!stock)
 		return (NULL);
-	return(stock);
+	return (stock);
 }
 
 char	*get_next_line(int fd)
@@ -73,13 +80,14 @@ char	*get_next_line(int fd)
 	int			byte;
 
 	stock = NULL;
-	byte = BUFFER_SIZE + 1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (is_line(buff))
 	{
 		ft_newline(buff);
 		stock = ft_line(buff, stock);
+		if (is_line(stock))
+			return (stock);
 	}
 	while (!is_line(buff))
 	{
@@ -90,10 +98,6 @@ char	*get_next_line(int fd)
 			return (free(stock), NULL);
 		buff[byte] = '\0';
 		stock = ft_line(buff, stock);
-		if (!stock)
-			return (0);
 	}
-//	if (byte == BUFFER_SIZE + 1)
-//		stock = ft_line(buff, stock);
-	return(stock);
+	return (stock);
 }

@@ -6,12 +6,12 @@
 /*   By: agilles <agilles@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:22:13 by agilles           #+#    #+#             */
-/*   Updated: 2023/12/08 15:26:29 by agilles          ###   ########.fr       */
+/*   Updated: 2023/12/08 18:02:36 by agilles          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <stdio.h>
 # include <stdlib.h>
